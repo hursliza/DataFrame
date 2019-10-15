@@ -20,7 +20,7 @@ public class DataFrame {
             dataFrame.add(newColumn);
         }
         data.remove(0);
-        ArrayList<ArrayList<Object>> columns = new ArrayList<ArrayList<Object>>();
+        ArrayList<ArrayList<Object>> columns = new ArrayList<>();
         for (int j = 0; j < data.get(0).length; j++){
             columns.add(new ArrayList<>());
         }
@@ -38,7 +38,7 @@ public class DataFrame {
         dataFrame = new ArrayList<>();
     }
 
-    public ArrayList<DataFrameColumn> data(){
+    ArrayList<DataFrameColumn> data(){
         return dataFrame;
     }
 
