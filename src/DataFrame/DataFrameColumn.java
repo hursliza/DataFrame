@@ -3,7 +3,7 @@ package DataFrame;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class DataFrameColumn{
+public class DataFrameColumn{
     private String name;
     private String type;
     ArrayList<Object> data;
@@ -30,11 +30,11 @@ class DataFrameColumn{
         return this.data;
     }
 
-    void fillInColumn(Object[] array){
+    public void fillInColumn(Object[] array){
         this.data.addAll(Arrays.asList(array));
     }
 
-    void fillInColumn(ArrayList<Object> array){
+    public void fillInColumn(ArrayList<Object> array){
         this.data.addAll(array);
     }
 
@@ -60,7 +60,7 @@ class DataFrameColumn{
             return null;
     }
 
-    void printColumn(){
+    public void printColumn(){
         if (this.data.isEmpty()){
             System.out.println("Column not found.");
         }

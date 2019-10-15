@@ -4,7 +4,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class SparseDataFrameColumn extends DataFrameColumn {
+public class SparseDataFrameColumn extends DataFrameColumn {
     private int initialSize = 0;
     SparseDataFrameColumn(String _name, String _type) {
         super(_name, _type);

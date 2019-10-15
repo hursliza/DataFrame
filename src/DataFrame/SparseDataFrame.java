@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SparseDataFrame extends DataFrame{
     private ArrayList<SparseDataFrameColumn> dataFrame = new ArrayList<>();
 
-    SparseDataFrame(DataFrame init, Object hide){
+    public SparseDataFrame(DataFrame init, Object hide){
         for (DataFrameColumn column : init.data()){
             SparseDataFrameColumn sparseColumn = new SparseDataFrameColumn(column, hide);
             this.dataFrame.add(sparseColumn);
@@ -29,7 +29,7 @@ public class SparseDataFrame extends DataFrame{
         }
     }
 
-    DataFrame toDense(Object hide){
+    public DataFrame toDense(Object hide){
         DataFrame denseDF = new DataFrame();
         for (SparseDataFrameColumn column : this.dataFrame){
             DataFrameColumn newColumn = column.createDenseColumn(hide);

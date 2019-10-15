@@ -1,7 +1,10 @@
-package DataFrame;
+import DataFrame.*;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        /*
         String[] columnName = new String[]{"index", "name", "language", "mark"};
         String[] columnType = new String[]{"int", "String", "String", "double"};
 
@@ -67,5 +70,19 @@ public class Main {
         DataFrame denseDF = sparseDF.toDense(0);
         System.out.println("\nBack to dense:");
         denseDF.printDataFrame();
+        */
+
+        /*
+        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\data.csv");
+        DataFrame DFFromFile = new DataFrame(path, new String[]{"float", "float", "float"});
+        DFFromFile.printDataFrame();
+        */
+
+        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\sparse.csv");
+        DataFrame DFFromFile = new DataFrame(path, new String[]{"float", "float", "float"});
+        SparseDataFrame SDFFromFile = new SparseDataFrame(DFFromFile, "0.0");
+        SDFFromFile.printDataFrame();
+
     }
+
 }

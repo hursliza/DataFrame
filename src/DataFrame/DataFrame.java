@@ -1,21 +1,44 @@
 package DataFrame;
-
+import java.io.*;
 import java.util.ArrayList;
 
 public class DataFrame {
     ArrayList<DataFrameColumn> dataFrame = new ArrayList<>();
 
-    DataFrame(String[] names, String[] types) {
+    public DataFrame(String[] names, String[] types) {
         for (int i = 0; i < names.length; i++){
             DataFrameColumn newColumn = new DataFrameColumn(names[i], types[i]);
             dataFrame.add(newColumn);
         }
     }
+
+    public DataFrame(String path, String[] types) throws IOException {
+        ArrayList<String[]> data = getData(path);
+        String[] names = data.get(0);
+        for (int i = 0; i < names.length; i++){
+            DataFrameColumn newColumn = new DataFrameColumn(names[i], types[i]);
+            dataFrame.add(newColumn);
+        }
+        data.remove(0);
+        ArrayList<ArrayList<Object>> columns = new ArrayList<ArrayList<Object>>();
+        for (int j = 0; j < data.get(0).length; j++){
+            columns.add(new ArrayList<>());
+        }
+        for (int i = 0; i < data.size(); i++){
+            for (int j = 0; j < data.get(0).length; j++){
+                columns.get(j).add(i,(Object) data.get(i)[j]);
+            }
+        }
+        for (int i = 0; i < columns.size(); i++){
+            this.data().get(i).fillInColumn(columns.get(i));
+        }
+    }
+
     DataFrame(){
         dataFrame = new ArrayList<>();
     }
 
-    ArrayList<DataFrameColumn> data(){
+    public ArrayList<DataFrameColumn> data(){
         return dataFrame;
     }
 
@@ -26,14 +49,14 @@ public class DataFrame {
             return 0;
     }
 
-    DataFrameColumn get(String columnName){
+    public DataFrameColumn get(String columnName){
         for (DataFrameColumn i : this.data())
             if (i.columnName().equals(columnName))
                 return i;
         return new DataFrameColumn("null", "null");
     }
 
-    DataFrame getDF(String[] names, boolean copy){
+    public DataFrame getDF(String[] names, boolean copy){
         DataFrame myDF = new DataFrame();
         for (String name : names){
             for (DataFrameColumn column : this.data()){
@@ -57,7 +80,7 @@ public class DataFrame {
         return myDF;
     }
 
-    DataFrame iloc(int num){
+    public DataFrame iloc(int num){
         DataFrame row = new DataFrame();
         for (DataFrameColumn column : this.data()){
             DataFrameColumn cell = column.createCell(column.getValue(num));
@@ -66,7 +89,7 @@ public class DataFrame {
         return row;
     }
 
-    DataFrame iloc(int from, int to){
+    public DataFrame iloc(int from, int to){
         DataFrame range = new DataFrame();
         for (DataFrameColumn column : this.data()){
             range.dataFrame.add(column.createRange(from, to));
@@ -86,4 +109,20 @@ public class DataFrame {
         }
     }
 
+    static ArrayList<String[]> getData(String path) throws IOException {
+        FileInputStream fstream = new FileInputStream(path);
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+        String strLine;
+
+        ArrayList<String[]> lines= new ArrayList<>();
+
+        //Read File Line By Line
+        while ((strLine = br.readLine()) != null)   {
+            String[] row = strLine.split(",");
+            lines.add(row);
+        }
+
+        return lines;
+    }
 }
