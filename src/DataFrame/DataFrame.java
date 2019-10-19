@@ -38,7 +38,7 @@ public class DataFrame {
         dataFrame = new ArrayList<>();
     }
 
-    ArrayList<DataFrameColumn> data(){
+    public ArrayList<DataFrameColumn> data(){
         return dataFrame;
     }
 

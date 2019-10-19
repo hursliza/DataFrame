@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Integer extends Value{
     private int myValue;
 
-    public Integer(String s){
+    public Integer(java.lang.String s){
         create(s);
     }
 
@@ -17,17 +17,17 @@ public class Integer extends Value{
         return this;
     }
 
-    public String toString() {
-        return String.valueOf(this.returnValue().myValue);
+    public java.lang.String toString() {
+        return java.lang.String.valueOf(this.returnValue().myValue);
     }
 
     public Integer add(Value other) {
         Integer newInstance = new Integer();
         if (other instanceof Integer){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             int newValue = java.lang.Integer.parseInt(thisStr) + java.lang.Integer.parseInt(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         return newInstance;
     }
@@ -35,10 +35,10 @@ public class Integer extends Value{
     public Integer sub(Value other) {
         Integer newInstance = new Integer();
         if (other instanceof Integer){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             int newValue = java.lang.Integer.parseInt(thisStr) - java.lang.Integer.parseInt(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         return newInstance;
     }
@@ -46,10 +46,10 @@ public class Integer extends Value{
     public Integer mul(Value other) {
         Integer newInstance = new Integer();
         if (other instanceof Integer){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             int newValue = java.lang.Integer.parseInt(thisStr) * java.lang.Integer.parseInt(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         return newInstance;
     }
@@ -57,10 +57,10 @@ public class Integer extends Value{
     public Integer div(Value other) {
         Integer newInstance = new Integer();
         if (other instanceof Integer){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             float newValue = (float) java.lang.Integer.parseInt(thisStr) / (float) java.lang.Integer.parseInt(otherStr);
-            newInstance.create(String.valueOf((int) newValue));
+            newInstance.create(java.lang.String.valueOf((int) newValue));
         }
         return newInstance;
     }
@@ -68,10 +68,10 @@ public class Integer extends Value{
     public Integer pow(Value other) {
         Integer newInstance = new Integer();
         if (other instanceof Integer) {
-            String thisStr = this.toString();
-            String otherStr = other.toString();
-            double newValue = Math.pow((double) java.lang.Integer.parseInt(thisStr), (double) java.lang.Integer.parseInt(otherStr));
-            newInstance.create(String.valueOf((int) newValue));
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
+            double newValue = Math.pow(java.lang.Integer.parseInt(thisStr), java.lang.Integer.parseInt(otherStr));
+            newInstance.create(java.lang.String.valueOf((int) newValue));
         }
         return newInstance;
     }
@@ -103,7 +103,7 @@ public class Integer extends Value{
         return Objects.hash(this.returnValue());
     }
 
-    public Integer create(String s) {
+    public Integer create(java.lang.String s) {
         this.myValue = java.lang.Integer.parseInt(s);
         return this;
     }

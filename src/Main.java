@@ -2,7 +2,9 @@ import DataFrame.*;
 import value.*;
 
 import java.io.*;
-import java.lang.Float;
+import java.lang.Double;
+import java.lang.Integer;
+import java.lang.String;
 import java.util.ArrayList;
 
 public class Main {
@@ -141,6 +143,22 @@ public class Main {
         System.out.println(af.toString() + "; " + bf.toString());
 
          */
+        value.String a, b;
+        String string1 = "My substring is just here!";
+        String string2 = "ing";
+        a = new value.String(string1);
+        b = new value.String(string2);
+        System.out.println("Add: " + a.add(b));
+        System.out.println("Sub: " + a.sub(b));
+        System.out.println("Mul: " + a.mul(b));
+        System.out.println("Div: " + a.div(b));
+        System.out.println("Pow: " + a.pow(b));
+        System.out.println("Eq: " + a.eq(b));
+        System.out.println("Neq: " + a.neq(b));
+        System.out.println("Lte: " + a.lte(b));
+        System.out.println("Gte: " + a.gte(b));
+        System.out.println("equals(Object = \"Ing\"): " + b.equals("Ing"));
+        System.out.println(a.toString() + "; " + b.toString());
     }
 
 }

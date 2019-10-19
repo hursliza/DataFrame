@@ -5,25 +5,25 @@ import java.util.Objects;
 public class Double extends Value{
     private double myValue;
 
-    public Double(String s){
+    public Double(java.lang.String s){
         this.create(s);
     }
 
-    public Double() {
+    private Double() {
         this.create("-87654.321");
     }
 
-    public String toString() {
-        return String.valueOf(myValue);
+    public java.lang.String toString() {
+        return java.lang.String.valueOf(myValue);
     }
 
     public Double add(Value other) {
         Double newInstance = new Double();
         if (other instanceof Double){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             double newValue = java.lang.Double.parseDouble(thisStr) + java.lang.Double.parseDouble(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -33,10 +33,10 @@ public class Double extends Value{
     public Double sub(Value other) {
         Double newInstance = new Double();
         if (other instanceof Double){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             double newValue = java.lang.Double.parseDouble(thisStr) - java.lang.Double.parseDouble(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -46,10 +46,10 @@ public class Double extends Value{
     public Value mul(Value other) {
         Double newInstance = new Double();
         if (other instanceof Double){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             double newValue = java.lang.Double.parseDouble(thisStr) * java.lang.Double.parseDouble(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -59,10 +59,10 @@ public class Double extends Value{
     public Value div(Value other) {
         Double newInstance = new Double();
         if (other instanceof Double){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             double newValue = java.lang.Double.parseDouble(thisStr) / java.lang.Double.parseDouble(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -72,10 +72,10 @@ public class Double extends Value{
     public Value pow(Value other) {
         Double newInstance = new Double();
         if (other instanceof Double){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             double newValue = Math.pow(java.lang.Double.parseDouble(thisStr), java.lang.Double.parseDouble(otherStr));
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -109,12 +109,12 @@ public class Double extends Value{
         return Objects.hash(this.returnValue());
     }
 
-    public Double create(String s) {
+    public Double create(java.lang.String s) {
         this.myValue = java.lang.Double.parseDouble(s);
         return this;
     }
 
-    public Value returnValue() {
+    public Double returnValue() {
         return this;
     }
 }

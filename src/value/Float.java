@@ -5,25 +5,25 @@ import java.util.Objects;
 public class Float extends Value {
     private float myValue;
 
-    public Float(String s){
+    public Float(java.lang.String s){
         this.create(s);
     }
 
-    public Float(){
+    private Float(){
         this.create("-87654.32");
     }
 
-    public String toString() {
-        return String.valueOf(myValue);
+    public java.lang.String toString() {
+        return java.lang.String.valueOf(myValue);
     }
 
     public Float add(Value other) {
         Float newInstance = new Float();
         if (other instanceof Float){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             float newValue = java.lang.Float.parseFloat(thisStr) + java.lang.Float.parseFloat(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -33,10 +33,10 @@ public class Float extends Value {
     public Float sub(Value other) {
         Float newInstance = new Float();
         if (other instanceof Float){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             float newValue = java.lang.Float.parseFloat(thisStr) - java.lang.Float.parseFloat(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -46,10 +46,10 @@ public class Float extends Value {
     public Value mul(Value other) {
         Float newInstance = new Float();
         if (other instanceof Float){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             float newValue = java.lang.Float.parseFloat(thisStr) * java.lang.Float.parseFloat(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -59,10 +59,10 @@ public class Float extends Value {
     public Value div(Value other) {
         Float newInstance = new Float();
         if (other instanceof Float){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             float newValue = java.lang.Float.parseFloat(thisStr) / java.lang.Float.parseFloat(otherStr);
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -72,10 +72,10 @@ public class Float extends Value {
     public Value pow(Value other) {
         Float newInstance = new Float();
         if (other instanceof Float){
-            String thisStr = this.toString();
-            String otherStr = other.toString();
+            java.lang.String thisStr = this.toString();
+            java.lang.String otherStr = other.toString();
             float newValue = (float) Math.pow(java.lang.Float.parseFloat(thisStr), java.lang.Float.parseFloat(otherStr));
-            newInstance.create(String.valueOf(newValue));
+            newInstance.create(java.lang.String.valueOf(newValue));
         }
         else
             newInstance.create("-87654.321");
@@ -109,7 +109,7 @@ public class Float extends Value {
         return Objects.hash(this.returnValue());
     }
 
-    public Float create(String s) {
+    public Float create(java.lang.String s) {
         this.myValue = java.lang.Float.parseFloat(s);
         return this;
     }

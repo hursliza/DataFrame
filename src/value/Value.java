@@ -1,7 +1,7 @@
 package value;
 
 public abstract class Value {
-    public abstract String toString();
+    public abstract java.lang.String toString();
     public abstract Value add(Value other);
     public abstract Value sub(Value other);
     public abstract Value mul(Value other);
@@ -13,6 +13,6 @@ public abstract class Value {
     public abstract boolean neq(Value other);
     public abstract boolean equals(Object other);
     public abstract int hashCode();
-    public abstract Value create(String s);
+    public abstract Value create(java.lang.String s);
     public abstract Value returnValue();
 }
