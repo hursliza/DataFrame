@@ -1,5 +1,8 @@
 import DataFrame.*;
+import value.*;
+
 import java.io.*;
+import java.lang.Float;
 import java.util.ArrayList;
 
 public class Main {
@@ -78,11 +81,66 @@ public class Main {
         DFFromFile.printDataFrame();
         */
 
+        /*
         String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\sparse.csv");
         DataFrame DFFromFile = new DataFrame(path, new String[]{"float", "float", "float"});
         SparseDataFrame SDFFromFile = new SparseDataFrame(DFFromFile, "0.0");
         SDFFromFile.printDataFrame();
+        */
 
+        /*
+        value.Integer a, b;
+        String number1 = "12";
+        String number2 = "20";
+        a = new value.Integer(number1);
+        b = new value.Integer(number2);
+        System.out.println("Add: " + a.add(b));
+        System.out.println("Sub: " + a.sub(b));
+        System.out.println("Mul: " + a.mul(b));
+        System.out.println("Div: " + a.div(b));
+        System.out.println("Pow: " + a.pow(b));
+        System.out.println("Eq: " + a.eq(b));
+        System.out.println("Neq: " + a.neq(b));
+        System.out.println("Lte: " + a.lte(b));
+        System.out.println("Gte: " + a.gte(b));
+        System.out.println("equals(Object = 12): " + a.equals(12));
+        System.out.println(a.toString() + "; " + b.toString());
+
+        System.out.println();
+        number1 = "12.5";
+        number2 = "20.146";
+        value.Double ad, bd;
+        ad = new value.Double(number1);
+        bd = new value.Double(number2);
+        System.out.println("Add: " + ad.add(bd));
+        System.out.println("Sub: " + ad.sub(bd));
+        System.out.println("Mul: " + ad.mul(bd));
+        System.out.println("Div: " + ad.div(bd));
+        System.out.println("Pow: " + ad.pow(bd));
+        System.out.println("Eq: " + ad.eq(bd));
+        System.out.println("Neq: " + ad.neq(bd));
+        System.out.println("Lte: " + ad.lte(bd));
+        System.out.println("Gte: " + ad.gte(bd));
+        System.out.println("equals(Object = 12.5): " + ad.equals(12.5));
+        System.out.println(ad.toString() + "; " + bd.toString());
+
+        System.out.println();
+        value.Float af, bf;
+        af = new value.Float(number1);
+        bf = new value.Float(number2);
+        System.out.println("Add: " + af.add(bf));
+        System.out.println("Sub: " + af.sub(bf));
+        System.out.println("Mul: " + af.mul(bf));
+        System.out.println("Div: " + af.div(bf));
+        System.out.println("Pow: " + af.pow(bf));
+        System.out.println("Eq: " + af.eq(bf));
+        System.out.println("Neq: " + af.neq(bf));
+        System.out.println("Lte: " + af.lte(bf));
+        System.out.println("Gte: " + af.gte(bf));
+        System.out.println("equals(Object = 12.5): " + af.equals(12.5));
+        System.out.println(af.toString() + "; " + bf.toString());
+
+         */
     }
 
 }
