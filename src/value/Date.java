@@ -19,7 +19,7 @@ public class Date extends Value {
         this.day = new Integer("0");
     }
 
-    private Integer toNum(){
+    Integer toNum(){
         return this.year.mul(new Integer("360")).add(this.month.mul(new Integer("30")).add(this.day));
     }
 

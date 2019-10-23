@@ -19,7 +19,7 @@ public class Time extends Value {
         this.seconds = new Integer("0");
     }
 
-    private Integer toNum(){
+    Integer toNum(){
         return this.hours.mul(new Integer("3600")).add(this.minutes.mul(new Integer("60")).add(this.seconds));
     }
 
