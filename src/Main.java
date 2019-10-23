@@ -90,7 +90,7 @@ public class Main {
         SDFFromFile.printDataFrame();
         */
 
-        /*
+/*
         value.Integer a, b;
         String number1 = "12";
         String number2 = "20";
@@ -108,6 +108,8 @@ public class Main {
         System.out.println("equals(Object = 12): " + a.equals(12));
         System.out.println(a.toString() + "; " + b.toString());
 
+ */
+/*
         System.out.println();
         number1 = "12.5";
         number2 = "20.146";
@@ -142,7 +144,7 @@ public class Main {
         System.out.println("equals(Object = 12.5): " + af.equals(12.5));
         System.out.println(af.toString() + "; " + bf.toString());
 
-         */
+
         value.String a, b;
         String string1 = "My substring is just here!";
         String string2 = "ing";
@@ -159,6 +161,17 @@ public class Main {
         System.out.println("Gte: " + a.gte(b));
         System.out.println("equals(Object = \"Ing\"): " + b.equals("Ing"));
         System.out.println(a.toString() + "; " + b.toString());
+        
+ */
+        value.Time a, b, c;
+        String aS = "20:10:15";
+        String bS = "1:2:5";
+        a = new Time(aS);
+        b = new Time(bS);
+        System.out.println(a.add(b).toString());
+        System.out.println(b.sub(a).toString());
+        c = new Time("20:10:16");
+        System.out.println(a.lte(c));
     }
 
 }

@@ -77,19 +77,27 @@ public class Integer extends Value{
     }
 
     public boolean eq(Value other) {
-        return (this == other);
+        return (this.myValue == ((Integer)other).myValue);
     }
 
     public boolean lte(Value other) {
         return (this.myValue <=  ((Integer)other).myValue);
     }
 
+    public boolean lt(Value other) {
+        return (this.myValue <  ((Integer)other).myValue);
+    }
+
     public boolean gte(Value other) {
         return (this.myValue >=  ((Integer)other).myValue);
     }
 
+    public boolean gt(Value other) {
+        return (this.myValue >  ((Integer)other).myValue);
+    }
+
     public boolean neq(Value other) {
-        return (this !=  other);
+        return (this.myValue !=  ((Integer)other).myValue);
     }
 
     public boolean equals(Object other) {
