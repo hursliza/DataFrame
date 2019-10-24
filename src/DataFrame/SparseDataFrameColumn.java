@@ -1,5 +1,6 @@
 package DataFrame;
 import javafx.util.Pair;
+import value.Value;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,12 +11,12 @@ class SparseDataFrameColumn extends DataFrameColumn {
         super(_name, _type);
     }
 
-    SparseDataFrameColumn(DataFrameColumn init, Object hide) {
+    SparseDataFrameColumn(DataFrameColumn init, Value hide) {
         super(init.columnName(), init.columnType());
         this.initialSize = init.columnSize();
         for (int i = 0; i < init.columnSize(); i++){
-            Object element = init.getValue(i);
-            if (!element.equals(hide)){
+            Value element = init.getValue(i);
+            if (!element.eq(hide)){
                 COOValue pair= new COOValue(i, element);
                 data.add(pair);
             }
@@ -32,7 +33,7 @@ class SparseDataFrameColumn extends DataFrameColumn {
     }
 
 
-    DataFrameColumn createDenseColumn(Object hide){
+    DataFrameColumn createDenseColumn(Value hide){
         DataFrameColumn denseColumn = new DataFrameColumn(this.columnName(), this.columnType());
         for (int i = 0; i < this.getInitialSize(); i++){
             denseColumn.data.add(hide);

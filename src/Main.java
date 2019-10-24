@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        /*
+
         String[] columnName = new String[]{"index", "name", "language", "mark"};
         String[] columnType = new String[]{"int", "String", "String", "double"};
 
@@ -68,14 +68,14 @@ public class Main {
         System.out.println("\nNew data frame:");
         sparseTest.printDataFrame();
 
-        SparseDataFrame sparseDF = new SparseDataFrame(sparseTest, 0);
+        SparseDataFrame sparseDF = new SparseDataFrame(sparseTest, new value.Integer("0"));
         System.out.println("\nSparse DF:");
         sparseDF.printDataFrame();
 
-        DataFrame denseDF = sparseDF.toDense(0);
+        DataFrame denseDF = sparseDF.toDense(new value.Integer("0"));
         System.out.println("\nBack to dense:");
         denseDF.printDataFrame();
-        */
+
 
         /*
         String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\data.csv");
@@ -163,6 +163,7 @@ public class Main {
         System.out.println(a.toString() + "; " + b.toString());
         
  */
+/*
         value.Time a, b, c;
         String aS = "20:10:15";
         String bS = "1:2:5";
@@ -172,6 +173,8 @@ public class Main {
         System.out.println(b.sub(a).toString());
         c = new Time("20:10:16");
         System.out.println(a.lte(c));
+
+ */
     }
 
 }

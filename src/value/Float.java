@@ -9,7 +9,7 @@ public class Float extends Value {
         this.create(s);
     }
 
-    private Float(){
+    Float(){
         this.create("-87654.32");
     }
 

@@ -13,7 +13,7 @@ public class Time extends Value {
     }
 
     public Time(java.lang.String s){    this.create(s); }
-    private Time(){
+    Time(){
         this.hours = new Integer("0");
         this.minutes = new Integer("0");
         this.seconds = new Integer("0");

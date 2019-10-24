@@ -1,5 +1,8 @@
 package DataFrame;
 import java.io.*;
+import value.*;
+
+import java.lang.String;
 import java.util.ArrayList;
 
 public class DataFrame {
@@ -20,17 +23,17 @@ public class DataFrame {
             dataFrame.add(newColumn);
         }
         data.remove(0);
-        ArrayList<ArrayList<Object>> columns = new ArrayList<>();
+        ArrayList<ArrayList<Value>> columns = new ArrayList<>();
         for (int j = 0; j < data.get(0).length; j++){
             columns.add(new ArrayList<>());
         }
         for (int i = 0; i < data.size(); i++){
             for (int j = 0; j < data.get(0).length; j++){
-                columns.get(j).add(i,(Object) data.get(i)[j]);
+                columns.get(j).add(i, Value.build(data.get(i)[j]));
             }
         }
         for (int i = 0; i < columns.size(); i++){
-            this.data().get(i).fillInColumn(columns.get(i));
+            this.data().get(i).fillInColumnValues(columns.get(i));
         }
     }
 

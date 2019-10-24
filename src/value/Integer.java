@@ -9,7 +9,7 @@ public class Integer extends Value{
         create(s);
     }
 
-    private Integer() {
+    Integer() {
         myValue = -8754321;
     }
 

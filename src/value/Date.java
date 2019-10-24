@@ -13,7 +13,7 @@ public class Date extends Value {
     }
 
     public Date(java.lang.String s){    this.create(s); }
-    private Date(){
+    Date(){
         this.year = new Integer("0");
         this.month = new Integer("0");
         this.day = new Integer("0");

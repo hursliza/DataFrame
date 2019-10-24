@@ -9,6 +9,10 @@ public class String extends Value {
         create(s);
     }
 
+    public String() {
+        create("");
+    }
+
     public java.lang.String toString() {
         return myValue;
     }

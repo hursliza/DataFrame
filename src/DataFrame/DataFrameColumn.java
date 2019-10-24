@@ -1,14 +1,15 @@
 package DataFrame;
+import value.*;
 
+import java.lang.String;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DataFrameColumn{
-    private String name;
-    private String type;
-    ArrayList<Object> data;
+    private java.lang.String name;
+    private java.lang.String type;
+    ArrayList<Value> data;
 
-    DataFrameColumn(String _name, String _type){
+    DataFrameColumn(java.lang.String _name, java.lang.String _type){
         name = _name;
         type = _type;
         data = createColumn(_type);
@@ -18,27 +19,37 @@ public class DataFrameColumn{
         return this.data.size();
     }
 
-    String columnName(){
+    java.lang.String columnName(){
         return this.name;
     }
 
-    String columnType(){
+    java.lang.String columnType(){
         return this.type;
     }
 
-    ArrayList<Object> listElements(){
+    ArrayList<Value> listElements(){
         return this.data;
     }
 
     public void fillInColumn(Object[] array){
-        this.data.addAll(Arrays.asList(array));
+        for (Object el:array) {
+            String element = String.valueOf(el);
+            this.data.add(Value.build(element));
+        }
+    }
+    public void fillInColumn(ArrayList<Value> array){
+        for (Object el:array) {
+            String element = String.valueOf(el);
+            this.data.add(Value.build(element));
+        }
+    }
+    public void fillInColumnValues(ArrayList<Value> array){
+        for (Object el:array) {
+            this.data.add((Value) el);
+        }
     }
 
-    public void fillInColumn(ArrayList<Object> array){
-        this.data.addAll(array);
-    }
-
-    DataFrameColumn createCell(Object ex){
+    DataFrameColumn createCell(Value ex){
         DataFrameColumn cell = new DataFrameColumn(this.columnName(), this.columnType());
         cell.data.add(ex);
         return cell;
@@ -52,7 +63,7 @@ public class DataFrameColumn{
         return newColumn;
     }
 
-    Object getValue(int i){
+    Value getValue(int i){
         if (i < data.size()){
             return data.get(i);
         }
@@ -71,7 +82,7 @@ public class DataFrameColumn{
         }
     }
 
-    private ArrayList<Object> createColumn(String type){
+    private ArrayList<Value> createColumn(java.lang.String type){
         return new ArrayList<>();
     }
 }

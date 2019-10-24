@@ -6,7 +6,7 @@ import java.util.Objects;
 
 class COOValue extends Value{
     private int key;
-    private Object value;
+    private Value value;
 
     public String toString() {
         return ("|\t(" + this.key + ", " + this.value + ")\t|");
@@ -28,7 +28,7 @@ class COOValue extends Value{
                 Objects.equals(value, cooValue.value);
     }
 
-    COOValue(int key, Object value){
+    COOValue(int key, Value value){
         this.key = key;
         this.value = value;
     }
@@ -37,7 +37,7 @@ class COOValue extends Value{
         return this.key;
     }
 
-    Object getValue() {
+    Value getValue() {
         return this.value;
     }
 

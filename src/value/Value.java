@@ -13,6 +13,40 @@ public abstract class Value {
     public abstract boolean neq(Value other);
     public abstract boolean equals(Object other);
     public abstract int hashCode();
-    public abstract Value create(java.lang.String s);
+
+    public Value create(java.lang.String s) {
+        return null;
+    }
+
     public abstract Value returnValue();
+    public static Value build(java.lang.String s){
+        if (s.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+            Date build = new Date();
+            build.create(s);
+            return build;
+        }
+        if (s.matches("^\\d{2}:\\d{2}:\\d{2}$")) {
+            Time build = new Time();
+            build.create(s);
+            return build;
+        }
+        if (s.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$")) {
+            DateTime build = new DateTime();
+            build.create(s);
+            return build;
+        }
+        if (s.matches("^\\d+$")){
+            Integer build = new Integer();
+            build.create(s);
+            return build;
+        }
+        if (s.matches("^\\d+\\.\\d+$")){
+            Float build = new Float();
+            build.create(s);
+            return build;
+        }
+        String build = new String();
+        build.create(s);
+        return build;
+    }
 }
