@@ -114,15 +114,17 @@ public class Date extends Value {
         return this != other;
     }
 
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || other.getClass() != this.getClass()) return false;
-        Date aDate = (Date) other;
-        return aDate.returnValue() == this.returnValue();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Date)) return false;
+        Date date = (Date) o;
+        return Objects.equals(year, date.year) &&
+                Objects.equals(month, date.month) &&
+                Objects.equals(day, date.day);
     }
 
     public int hashCode() {
-        return Objects.hash(this);
+        return Objects.hash(year, month, day);
     }
 
     public Date create(java.lang.String s) {

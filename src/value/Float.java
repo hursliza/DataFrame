@@ -83,7 +83,7 @@ public class Float extends Value {
     }
 
     public boolean eq(Value other) {
-        return (this == other);
+        return (this.myValue == ((Float)other).myValue);
     }
 
     public boolean lte(Value other) {
@@ -98,15 +98,15 @@ public class Float extends Value {
         return (this != other);
     }
 
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || this.getClass() != other.getClass()) return false;
-        Float aFloat = (Float) other;
-        return this.returnValue() == aFloat.returnValue();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Float)) return false;
+        Float aFloat = (Float) o;
+        return java.lang.Float.compare(aFloat.myValue, myValue) == 0;
     }
 
     public int hashCode() {
-        return Objects.hash(this.returnValue());
+        return Objects.hash(myValue);
     }
 
     public Float create(java.lang.String s) {

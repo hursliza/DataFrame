@@ -50,8 +50,19 @@ public class String extends Value {
         return null;
     }
 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof String)) return false;
+        String string = (String) o;
+        return Objects.equals(myValue, string.myValue);
+    }
+
+    public int hashCode() {
+        return Objects.hash(myValue);
+    }
+
     public boolean eq(Value other) {
-        return (this == other);
+        return (this.myValue == ((String)other).myValue);
     }
 
     public boolean lte(Value other) {
@@ -64,17 +75,6 @@ public class String extends Value {
 
     public boolean neq(Value other) {
         return (this != other);
-    }
-
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if ((other == null) || this.getClass() != other.getClass()) return false;
-        String string = (String) other;
-        return (this.returnValue() == string.returnValue());
-    }
-
-    public int hashCode() {
-        return Objects.hash(this.returnValue());
     }
 
     public Value create(java.lang.String s) {

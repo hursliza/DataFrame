@@ -1,11 +1,15 @@
 package DataFrame;
 import java.io.*;
+
+import javafx.util.Pair;
 import value.*;
 
+import java.lang.Integer;
 import java.lang.String;
-import java.util.ArrayList;
+import java.util.*;
 
-public class DataFrame {
+
+public class DataFrame implements Groupby{
     ArrayList<DataFrameColumn> dataFrame = new ArrayList<>();
 
     public DataFrame(String[] names, String[] types) {
@@ -100,6 +104,19 @@ public class DataFrame {
         return range;
     }
 
+    public DataFrame addRow(DataFrame row){
+        if (!this.dataFrame.isEmpty()){
+            for (int i = 0; i < this.dataFrame.size(); i++){
+                this.dataFrame.get(i).data.add(row.dataFrame.get(i).data.get(0));
+            }
+        }
+        else
+            for (DataFrameColumn cell : row.dataFrame){
+                this.dataFrame.add(cell);
+            }
+        return this;
+    }
+
     public void printDataFrame(){
         for (DataFrameColumn column : this.data())
             System.out.print("|\t" + column.columnName() + "\t|");
@@ -127,5 +144,80 @@ public class DataFrame {
         }
 
         return lines;
+    }
+
+    @Override
+    public DataFrame max() {
+        return null;
+    }
+
+    @Override
+    public DataFrame min() {
+        return null;
+    }
+
+    @Override
+    public DataFrame std() {
+        return null;
+    }
+
+    @Override
+    public DataFrame sum() {
+        return null;
+    }
+
+    @Override
+    public DataFrame var() {
+        return null;
+    }
+
+    @Override
+    public LinkedList<DataFrame> groupby(String colname) {
+        DataFrameColumn keys = this.get(colname);
+        ArrayList<Value> uniqueKeys = removeDuplicates(keys.data);
+        Map<Value, List<Integer>> entries = new HashMap<>();
+        for (Value element : uniqueKeys) {
+            entries.put(element, indexOfAll(element, keys.data));
+        }
+        LinkedList<DataFrame> grouped = new LinkedList<>();
+        for (Map.Entry<Value, List<Integer>> entry : entries.entrySet()){
+            DataFrame newDF = new DataFrame();
+            for (int i : entry.getValue()){
+                newDF.addRow(this.iloc(i));
+            }
+            grouped.add(newDF);
+        }
+        return grouped;
+    }
+
+    private ArrayList<Value> removeDuplicates(ArrayList<Value> list)
+    {
+        ArrayList<Value> newArray = new ArrayList<>();
+        for (Value element : list) {
+            if (!newArray.isEmpty()) {
+                int ent = 0;
+                for (int i = 0; i < newArray.size(); i++) {
+                    if (element.eq(newArray.get(i))) {
+                        ent += 1;
+                        break;
+                    }
+                }
+                if (ent == 0)
+                    newArray.add(element);
+            }
+            else
+                newArray.add(element);
+        }
+        return newArray;
+    }
+
+    private List<Integer> indexOfAll(Value obj, List<Value> list) {
+        final List<Integer> indexList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (obj.eq(list.get(i))) {
+                indexList.add(i);
+            }
+        }
+        return indexList;
     }
 }

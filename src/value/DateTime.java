@@ -128,15 +128,16 @@ public class DateTime extends Value {
         return (this != other);
     }
 
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || other.getClass()!=this.getClass()) return false;
-        DateTime aDateTime = (DateTime) other;
-        return (this.returnValue() == ((DateTime) other).returnValue());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DateTime)) return false;
+        DateTime dateTime = (DateTime) o;
+        return Objects.equals(date, dateTime.date) &&
+                Objects.equals(time, dateTime.time);
     }
 
     public int hashCode() {
-        return Objects.hash(this);
+        return Objects.hash(date, time);
     }
 
     public DateTime create(java.lang.String s) {

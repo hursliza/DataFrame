@@ -76,6 +76,17 @@ public class Integer extends Value{
         return newInstance;
     }
 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Integer)) return false;
+        Integer integer = (Integer) o;
+        return myValue == integer.myValue;
+    }
+
+    public int hashCode() {
+        return Objects.hash(myValue);
+    }
+
     public boolean eq(Value other) {
         return (this.myValue == ((Integer)other).myValue);
     }
@@ -98,17 +109,6 @@ public class Integer extends Value{
 
     public boolean neq(Value other) {
         return (this.myValue !=  ((Integer)other).myValue);
-    }
-
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || this.getClass() != other.getClass()) return false;
-        Integer integer = (Integer) other;
-        return this.returnValue() == integer.returnValue();
-    }
-
-    public int hashCode() {
-        return Objects.hash(this.returnValue());
     }
 
     public Integer create(java.lang.String s) {

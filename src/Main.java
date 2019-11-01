@@ -6,6 +6,7 @@ import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -18,7 +19,7 @@ public class Main {
         Integer[] index = new Integer[]{12100, 12110, 12320, 14521, 13207};
         String[] name = new String[]{"olga", "michal", "poco", "agata", "piotr"};
         String[] language = new String[]{"english", "french", "english", "java", "spanish"};
-        Double[] mark = new Double[]{4.5, 3.0, 3.5, 4.0, 3.5};
+        Double[] mark = new Double[]{4.0, 3.0, 3.5, 4.0, 3.5};
 
         test.data().get(0).fillInColumn(index);
         test.data().get(1).fillInColumn(name);
@@ -30,6 +31,8 @@ public class Main {
         System.out.println("\nTestowanie sizeDF()");
         System.out.println(test.sizeDF());
 
+        LinkedList<DataFrame> tstGPB = new LinkedList<>();
+        tstGPB = test.groupby("mark");
 
         //testowanie metod get
         DataFrameColumn testColumn;

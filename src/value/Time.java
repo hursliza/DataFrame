@@ -74,6 +74,19 @@ public class Time extends Value {
         return false;
     }
 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Time)) return false;
+        Time time = (Time) o;
+        return Objects.equals(hours, time.hours) &&
+                Objects.equals(minutes, time.minutes) &&
+                Objects.equals(seconds, time.seconds);
+    }
+
+    public int hashCode() {
+        return Objects.hash(hours, minutes, seconds);
+    }
+
     public boolean lte(Value other) {
         if (other instanceof Time){
             if (((Time) other).hours.gt(this.hours))
@@ -104,17 +117,6 @@ public class Time extends Value {
 
     public boolean neq(Value other) {
         return (this != other);
-    }
-
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || other.getClass() != this.getClass()) return false;
-        Time aTime = (Time) other;
-        return aTime.returnValue() == this.returnValue();
-    }
-
-    public int hashCode() {
-        return Objects.hash(this);
     }
 
     public Value create(java.lang.String s) {

@@ -82,8 +82,19 @@ public class Double extends Value{
         return newInstance;
     }
 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Double)) return false;
+        Double aDouble = (Double) o;
+        return java.lang.Double.compare(aDouble.myValue, myValue) == 0;
+    }
+
+    public int hashCode() {
+        return Objects.hash(myValue);
+    }
+
     public boolean eq(Value other) {
-        return (this == other);
+        return (this.myValue == ((Double)other).myValue);
     }
 
     public boolean lte(Value other) {
@@ -96,17 +107,6 @@ public class Double extends Value{
 
     public boolean neq(Value other) {
         return (this != other);
-    }
-
-    public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || this.getClass() != other.getClass()) return false;
-        Double aDouble = (Double) other;
-        return this.returnValue() == aDouble.returnValue();
-    }
-
-    public int hashCode() {
-        return Objects.hash(this.returnValue());
     }
 
     public Double create(java.lang.String s) {
