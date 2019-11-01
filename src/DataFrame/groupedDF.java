@@ -32,21 +32,21 @@ public class groupedDF implements Groupby{
 
     @Override
     public DataFrame min() {
-        DataFrame maxDF = new DataFrame();
+        DataFrame minDF = new DataFrame();
         for (DataFrame group : this.dfList){
             DataFrame row = new DataFrame();
             for (int j=0; j < group.dataFrame.size(); j++) {
-                Value maxValue = group.dataFrame.get(j).data.get(0);
+                Value minValue = group.dataFrame.get(j).data.get(0);
                 for (int i=0; i < group.dataFrame.get(j).columnSize(); i++){
-                    if (group.dataFrame.get(j).data.get(i).lte(maxValue)){
-                        maxValue = group.dataFrame.get(j).data.get(i);
+                    if (group.dataFrame.get(j).data.get(i).lte(minValue)){
+                        minValue = group.dataFrame.get(j).data.get(i);
                     }
                 }
-                row.dataFrame.add(group.dataFrame.get(j).createCell(maxValue));
+                row.dataFrame.add(group.dataFrame.get(j).createCell(minValue));
             }
-            maxDF.addRow(row);
+            minDF.addRow(row);
         }
-        return maxDF;
+        return minDF;
     }
 
     @Override
@@ -56,7 +56,22 @@ public class groupedDF implements Groupby{
 
     @Override
     public DataFrame sum() {
-        return null;
+        DataFrame sumDF = new DataFrame();
+        for (DataFrame group : this.dfList){
+            DataFrame row = new DataFrame();
+            for (int j=0; j < group.dataFrame.size(); j++) {
+                if ((group.dataFrame.get(j).columnType() == "int")||(group.dataFrame.get(j).columnType() == "float")
+                ||(group.dataFrame.get(j).columnType() == "double")) {
+                    Value sumValue = group.dataFrame.get(j).data.get(0);
+                    for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
+                        sumValue = sumValue.add(group.dataFrame.get(j).data.get(i));
+                    }
+                    row.dataFrame.add(group.dataFrame.get(j).createCell(sumValue));
+                }
+            }
+            sumDF.addRow(row);
+        }
+        return sumDF;
     }
 
     @Override

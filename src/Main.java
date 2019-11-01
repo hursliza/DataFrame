@@ -32,7 +32,7 @@ public class Main {
         System.out.println(test.sizeDF());
 
         groupedDF tstGPB = new groupedDF(test, "mark");
-        DataFrame minDF = tstGPB.min();
+        DataFrame sumDF = tstGPB.sum();
 
         //testowanie metod get
         DataFrameColumn testColumn;
