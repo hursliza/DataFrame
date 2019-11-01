@@ -8,5 +8,4 @@ public interface Groupby {
     DataFrame std();
     DataFrame sum();
     DataFrame var();
-    LinkedList<DataFrame> groupby(String colname);
 }

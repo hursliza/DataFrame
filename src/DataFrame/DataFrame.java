@@ -146,32 +146,6 @@ public class DataFrame implements Groupby{
         return lines;
     }
 
-    @Override
-    public DataFrame max() {
-        return null;
-    }
-
-    @Override
-    public DataFrame min() {
-        return null;
-    }
-
-    @Override
-    public DataFrame std() {
-        return null;
-    }
-
-    @Override
-    public DataFrame sum() {
-        return null;
-    }
-
-    @Override
-    public DataFrame var() {
-        return null;
-    }
-
-    @Override
     public LinkedList<DataFrame> groupby(String colname) {
         DataFrameColumn keys = this.get(colname);
         ArrayList<Value> uniqueKeys = removeDuplicates(keys.data);
@@ -220,4 +194,30 @@ public class DataFrame implements Groupby{
         }
         return indexList;
     }
+
+    @Override
+    public DataFrame max() {
+        return null;
+    }
+
+    @Override
+    public DataFrame min() {
+        return null;
+    }
+
+    @Override
+    public DataFrame std() {
+        return null;
+    }
+
+    @Override
+    public DataFrame sum() {
+        return null;
+    }
+
+    @Override
+    public DataFrame var() {
+        return null;
+    }
 }
+

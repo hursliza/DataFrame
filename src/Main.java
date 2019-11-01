@@ -31,8 +31,8 @@ public class Main {
         System.out.println("\nTestowanie sizeDF()");
         System.out.println(test.sizeDF());
 
-        LinkedList<DataFrame> tstGPB = new LinkedList<>();
-        tstGPB = test.groupby("mark");
+        groupedDF tstGPB = new groupedDF(test, "mark");
+        DataFrame minDF = tstGPB.min();
 
         //testowanie metod get
         DataFrameColumn testColumn;
@@ -55,7 +55,7 @@ public class Main {
         System.out.println("\nTestowanie iloc(int from, int to)");
         ilocTest = test.iloc(2, 4);
         ilocTest.printDataFrame();
-
+/*
         //Sparse Data Frame tests
         columnName = new String[]{"houses", "flats"};
         columnType = new String[]{"int", "int"};
