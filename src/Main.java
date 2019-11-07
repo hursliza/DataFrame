@@ -10,18 +10,18 @@ import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-        String[] columnName = new String[]{"index", "name", "language", "mark"};
-        String[] columnType = new String[]{"int", "String", "String", "double"};
+/*
+        String[] columnName = new String[]{"group", "name", "language", "mark"};
+        String[] columnType = new String[]{"int", "String", "String", "int"};
 
         DataFrame test = new DataFrame(columnName, columnType);
 
-        Integer[] index = new Integer[]{12100, 12110, 12320, 14521, 13207};
-        String[] name = new String[]{"olga", "michal", "poco", "agata", "piotr"};
-        String[] language = new String[]{"english", "french", "english", "java", "spanish"};
-        Double[] mark = new Double[]{4.0, 3.0, 3.5, 4.0, 3.5};
+        Integer[] group = new Integer[]{1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3};
+        String[] name = new String[]{"a", "b", "c", "d", "a", "b", "c", "d","a", "b", "c", "d"};
+        String[] language = new String[]{"E", "F", "F", "S", "E", "S", "F", "E", "S", "F", "E", "S"};
+        Integer[] mark = new Integer[]{1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1};
 
-        test.data().get(0).fillInColumn(index);
+        test.data().get(0).fillInColumn(group);
         test.data().get(1).fillInColumn(name);
         test.data().get(2).fillInColumn(language);
         test.data().get(3).fillInColumn(mark);
@@ -31,9 +31,50 @@ public class Main {
         System.out.println("\nTestowanie sizeDF()");
         System.out.println(test.sizeDF());
 
-        groupedDF tstGPB = new groupedDF(test, "mark");
-        DataFrame sumDF = tstGPB.sum();
+        groupedDF tstGPB = test.groupby(new String[]{"group", "language"});
 
+
+        //Mediana
+        DataFrame applyDF = tstGPB.apply(new Applyable() {
+            @Override
+            public DataFrame apply(DataFrame group) {
+                DataFrame newRow = new DataFrame();
+                if (group.dataFrame.get(0).columnSize() % 2 == 1) {
+                    for (DataFrameColumn col : group.dataFrame) {
+                        if ((col.columnType().equals("int"))||(col.columnType().equals("double"))||(col.columnType().equals("float"))) {
+                            Value value;
+                            value = Value.build(String.valueOf(col.data.get(group.dataFrame.get(0).columnSize() / 2)));
+                            newRow.dataFrame.add(col.createCell(value));
+                        }
+                    }
+                } else
+                    for (DataFrameColumn col : group.dataFrame) {
+                        Value value;
+                        if (col.columnType().equals("int")) {
+                            value = Value.build(String.valueOf(
+                                    col.data.get(group.dataFrame.get(0).columnSize() / 2 - 1).add(
+                                            col.data.get(group.dataFrame.get(0).columnSize() / 2)
+                                    ).div(Value.build("2"))
+                            ));
+                            newRow.dataFrame.add(col.createCell(value));
+                        }
+                        if ((col.columnType().equals("float"))||(col.columnType().equals("double"))) {
+                            value = Value.build(String.valueOf(
+                                    col.data.get(group.dataFrame.get(0).columnSize() / 2 - 1).add(
+                                            col.data.get(group.dataFrame.get(0).columnSize() / 2)
+                                    ).div(Value.build("2.0"))
+                            ));
+                            newRow.dataFrame.add(col.createCell(value));
+                        }
+                    }
+                return newRow;
+            }
+        });
+
+*/
+
+
+/*
         //testowanie metod get
         DataFrameColumn testColumn;
 
@@ -78,13 +119,12 @@ public class Main {
         DataFrame denseDF = sparseDF.toDense(new value.Integer("0"));
         System.out.println("\nBack to dense:");
         denseDF.printDataFrame();
-
-
-        /*
-        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\data.csv");
-        DataFrame DFFromFile = new DataFrame(path, new String[]{"float", "float", "float"});
-        DFFromFile.printDataFrame();
         */
+
+        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\groupby\\groupby.csv");
+        DataFrame DFFromFile = new DataFrame(path, new String[]{"String", "Date", "double", "double"});
+        DFFromFile.groupby("id").std().printDataFrame();
+
 
         /*
         String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\sparse.csv");
@@ -176,8 +216,7 @@ public class Main {
         System.out.println(b.sub(a).toString());
         c = new Time("20:10:16");
         System.out.println(a.lte(c));
-
+}
  */
     }
-
 }

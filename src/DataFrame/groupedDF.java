@@ -1,15 +1,16 @@
 package DataFrame;
 
+import value.Double;
 import value.Value;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class groupedDF implements Groupby{
-    LinkedList<DataFrame> dfList = new LinkedList<>();
+    public LinkedList<DataFrame> dfList;
 
-    public groupedDF(DataFrame df, String colname){
-        dfList = df.groupby(colname);
-    }
+    public groupedDF(DataFrame df, String colname){ dfList= df.groupby(colname).dfList; }
+    public groupedDF() {dfList = new LinkedList<>();}
 
     @Override
     public DataFrame max() {
@@ -50,8 +51,57 @@ public class groupedDF implements Groupby{
     }
 
     @Override
+    public DataFrame mean() {
+        DataFrame meanDF = new DataFrame();
+        for (DataFrame group : this.dfList){
+            DataFrame row = new DataFrame();
+            for (int j=0; j < group.dataFrame.size(); j++) {
+                if ((group.dataFrame.get(j).columnType().equals("int"))||(group.dataFrame.get(j).columnType().equals("float"))
+                        ||(group.dataFrame.get(j).columnType().equals("double"))) {
+                    Double meanValue = (Double) group.dataFrame.get(j).data.get(0);
+                    for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
+                        meanValue = meanValue.add(group.dataFrame.get(j).data.get(i));
+                    }
+                    meanValue = (Double) meanValue.div(new Double(String.valueOf(group.dataFrame.get(j).columnSize())));
+                    row.dataFrame.add(group.dataFrame.get(j).createCell(meanValue));
+                }
+            }
+            meanDF.addRow(row);
+        }
+        return meanDF;
+    }
+
+    @Override
     public DataFrame std() {
-        return null;
+        DataFrame stdDF = new DataFrame();
+        for (DataFrame group : this.dfList){
+            DataFrame row = new DataFrame();
+            for (int j=0; j < group.dataFrame.size(); j++) {
+                if ((group.dataFrame.get(j).columnType().equals("int"))||(group.dataFrame.get(j).columnType().equals("float"))
+                        ||(group.dataFrame.get(j).columnType().equals("double"))) {
+
+                    Double meanValue = (Double) group.dataFrame.get(j).data.get(0);
+                    for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
+                        meanValue = meanValue.add(group.dataFrame.get(j).data.get(i));
+                    }
+                    meanValue = (Double) meanValue.div(new Double(String.valueOf(group.dataFrame.get(j).columnSize())));
+
+                    Double sumValue = (Double) group.dataFrame.get(j).data.get(0).sub(meanValue).mul
+                            (group.dataFrame.get(j).data.get(0).sub(meanValue));
+                    for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
+                        sumValue = sumValue.add(group.dataFrame.get(j).data.get(i).sub(meanValue).mul
+                                (group.dataFrame.get(j).data.get(i).sub(meanValue)));
+                    }
+                    Double varVal = new Double(sumValue.div(Value.build(String.valueOf(group.dataFrame.get(j).columnSize()))).toString());
+                    String strVal = varVal.toString();
+                    Double stdVal = new Double(String.valueOf(Math.sqrt(java.lang.Double.parseDouble(strVal))));
+                    row.dataFrame.add(group.dataFrame.get(j).createCell(stdVal));
+                }
+
+            }
+            stdDF.addRow(row);
+        }
+        return stdDF;
     }
 
     @Override
@@ -60,8 +110,8 @@ public class groupedDF implements Groupby{
         for (DataFrame group : this.dfList){
             DataFrame row = new DataFrame();
             for (int j=0; j < group.dataFrame.size(); j++) {
-                if ((group.dataFrame.get(j).columnType() == "int")||(group.dataFrame.get(j).columnType() == "float")
-                ||(group.dataFrame.get(j).columnType() == "double")) {
+                if ((group.dataFrame.get(j).columnType().equals("int"))||(group.dataFrame.get(j).columnType().equals("float"))
+                ||(group.dataFrame.get(j).columnType().equals("double"))) {
                     Value sumValue = group.dataFrame.get(j).data.get(0);
                     for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
                         sumValue = sumValue.add(group.dataFrame.get(j).data.get(i));
@@ -76,7 +126,42 @@ public class groupedDF implements Groupby{
 
     @Override
     public DataFrame var() {
-        return null;
+        DataFrame varDF = new DataFrame();
+        for (DataFrame group : this.dfList){
+            DataFrame row = new DataFrame();
+            for (int j=0; j < group.dataFrame.size(); j++) {
+                if ((group.dataFrame.get(j).columnType().equals("int"))||(group.dataFrame.get(j).columnType().equals("float"))
+                        ||(group.dataFrame.get(j).columnType().equals("double"))) {
+
+                    Double meanValue = (Double) group.dataFrame.get(j).data.get(0);
+                    for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
+                        meanValue = meanValue.add(group.dataFrame.get(j).data.get(i));
+                    }
+                    meanValue = (Double) meanValue.div(new Double(String.valueOf(group.dataFrame.get(j).columnSize())));
+
+                    Double sumValue = (Double) group.dataFrame.get(j).data.get(0).sub(meanValue).mul
+                            (group.dataFrame.get(j).data.get(0).sub(meanValue));
+                    for (int i = 1; i < group.dataFrame.get(j).columnSize(); i++) {
+                        sumValue = sumValue.add(group.dataFrame.get(j).data.get(i).sub(meanValue).mul
+                                (group.dataFrame.get(j).data.get(i).sub(meanValue)));
+                    }
+                    row.dataFrame.add(group.dataFrame.get(j).createCell(new Double(sumValue.div(Value.build(String.valueOf(group.dataFrame.get(j).columnSize()))).toString())));
+                }
+
+            }
+            varDF.addRow(row);
+        }
+        return varDF;
     }
 
+    @Override
+    public DataFrame apply(Applyable fun) {
+        DataFrame newDF = new DataFrame();
+        for (DataFrame group : this.dfList){
+            DataFrame newRow = fun.apply(group);
+            newDF.addRow(newRow);
+        }
+        return newDF;
+    }
 }
+

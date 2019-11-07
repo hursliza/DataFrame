@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class DataFrameColumn{
     private java.lang.String name;
     private java.lang.String type;
-    ArrayList<Value> data;
+    public ArrayList<Value> data;
 
     DataFrameColumn(java.lang.String _name, java.lang.String _type){
         name = _name;
@@ -15,15 +15,15 @@ public class DataFrameColumn{
         data = createColumn(_type);
     }
 
-    int columnSize(){
+    public int columnSize(){
         return this.data.size();
     }
 
-    java.lang.String columnName(){
+    public java.lang.String columnName(){
         return this.name;
     }
 
-    java.lang.String columnType(){
+    public java.lang.String columnType(){
         return this.type;
     }
 
@@ -49,7 +49,7 @@ public class DataFrameColumn{
         }
     }
 
-    DataFrameColumn createCell(Value ex){
+    public DataFrameColumn createCell(Value ex){
         DataFrameColumn cell = new DataFrameColumn(this.columnName(), this.columnType());
         cell.data.add(ex);
         return cell;

@@ -137,7 +137,10 @@ public class Date extends Value {
                 return null;
             }
         }
-
+        this.year = new Integer(date[0]);
+        this.month = new Integer(date[1]);
+        this.day = new Integer(date[2]);
+/*
         this.year = new Integer(date[0]);
         if ((java.lang.Integer.parseInt(date[1]) < 13) && (java.lang.Integer.parseInt(date[1]) > 0))
             this.month = new Integer(date[1]);
@@ -157,6 +160,8 @@ public class Date extends Value {
                 e.printStackTrace();
                 return null;
             }
+
+ */
         return  this;
     }
 

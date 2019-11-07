@@ -9,8 +9,8 @@ import java.lang.String;
 import java.util.*;
 
 
-public class DataFrame implements Groupby{
-    ArrayList<DataFrameColumn> dataFrame = new ArrayList<>();
+public class DataFrame{
+    public ArrayList<DataFrameColumn> dataFrame = new ArrayList<>();
 
     public DataFrame(String[] names, String[] types) {
         for (int i = 0; i < names.length; i++){
@@ -41,7 +41,7 @@ public class DataFrame implements Groupby{
         }
     }
 
-    DataFrame(){
+    public DataFrame(){
         dataFrame = new ArrayList<>();
     }
 
@@ -146,9 +146,13 @@ public class DataFrame implements Groupby{
         return lines;
     }
 
-    public LinkedList<DataFrame> groupby(String colname) {
+    public groupedDF groupby(String colname) {
+        groupedDF newGDF = new groupedDF();
         DataFrameColumn keys = this.get(colname);
-        ArrayList<Value> uniqueKeys = removeDuplicates(keys.data);
+        Set<Value> uniqueKeys = new HashSet<>();
+        for (Value key : keys.data){
+            uniqueKeys.add(key);
+        }
         Map<Value, List<Integer>> entries = new HashMap<>();
         for (Value element : uniqueKeys) {
             entries.put(element, indexOfAll(element, keys.data));
@@ -161,9 +165,26 @@ public class DataFrame implements Groupby{
             }
             grouped.add(newDF);
         }
+        newGDF.dfList = grouped;
+        return newGDF;
+    }
+
+    public groupedDF groupby(String[] cols){
+        LinkedList<DataFrame> L = new LinkedList<>();
+        L.add(this);
+        for (String name : cols){
+            LinkedList<DataFrame> nL= new LinkedList<>();
+            for (DataFrame el : L){
+                nL.addAll(el.groupby(name).dfList);
+            }
+            L = nL;
+        }
+        groupedDF grouped = new groupedDF();
+        grouped.dfList = L;
         return grouped;
     }
 
+/*
     private ArrayList<Value> removeDuplicates(ArrayList<Value> list)
     {
         ArrayList<Value> newArray = new ArrayList<>();
@@ -171,7 +192,7 @@ public class DataFrame implements Groupby{
             if (!newArray.isEmpty()) {
                 int ent = 0;
                 for (int i = 0; i < newArray.size(); i++) {
-                    if (element.eq(newArray.get(i))) {
+                    if (element.equals(newArray.get(i))) {
                         ent += 1;
                         break;
                     }
@@ -185,39 +206,18 @@ public class DataFrame implements Groupby{
         return newArray;
     }
 
+ */
+
     private List<Integer> indexOfAll(Value obj, List<Value> list) {
-        final List<Integer> indexList = new ArrayList<>();
+        List<Integer> indexList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (obj.eq(list.get(i))) {
+            if (obj.equals(list.get(i))) {
                 indexList.add(i);
             }
         }
         return indexList;
     }
 
-    @Override
-    public DataFrame max() {
-        return null;
-    }
 
-    @Override
-    public DataFrame min() {
-        return null;
-    }
-
-    @Override
-    public DataFrame std() {
-        return null;
-    }
-
-    @Override
-    public DataFrame sum() {
-        return null;
-    }
-
-    @Override
-    public DataFrame var() {
-        return null;
-    }
 }
 

@@ -35,13 +35,13 @@ public abstract class Value implements Cloneable{
             build.create(s);
             return build;
         }
-        if (s.matches("^\\d+$")){
+        if (s.matches("^-?\\d+$")){
             Integer build = new Integer();
             build.create(s);
             return build;
         }
-        if (s.matches("^\\d+\\.\\d+$")){
-            Float build = new Float();
+        if (s.matches("^\\-?\\d+[\\.]?\\d+e?E?\\+?-?\\d+$")){
+            Double build = new Double();
             build.create(s);
             return build;
         }

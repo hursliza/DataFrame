@@ -95,7 +95,7 @@ public class Float extends Value {
     }
 
     public boolean neq(Value other) {
-        return (this != other);
+        return (this.myValue != ((Float) other).myValue);
     }
 
     public boolean equals(Object o) {

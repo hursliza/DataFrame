@@ -3,13 +3,13 @@ package value;
 import java.util.Objects;
 
 public class Double extends Value{
-    private double myValue;
+    public double myValue;
 
     public Double(java.lang.String s){
         this.create(s);
     }
 
-    private Double() {
+    Double() {
         this.create("-87654.321");
     }
 
@@ -58,14 +58,10 @@ public class Double extends Value{
 
     public Value div(Value other) {
         Double newInstance = new Double();
-        if (other instanceof Double){
-            java.lang.String thisStr = this.toString();
-            java.lang.String otherStr = other.toString();
-            double newValue = java.lang.Double.parseDouble(thisStr) / java.lang.Double.parseDouble(otherStr);
-            newInstance.create(java.lang.String.valueOf(newValue));
-        }
-        else
-            newInstance.create("-87654.321");
+        java.lang.String thisStr = this.toString();
+        java.lang.String otherStr = other.toString();
+        double newValue = java.lang.Double.parseDouble(thisStr) / java.lang.Double.parseDouble(otherStr);
+        newInstance.create(java.lang.String.valueOf(newValue));
         return newInstance;
     }
 
