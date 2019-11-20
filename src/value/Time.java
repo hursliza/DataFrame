@@ -1,5 +1,6 @@
 package value;
 
+import Exceptions.*;
 import java.io.InvalidObjectException;
 import java.util.Objects;
 
@@ -56,15 +57,30 @@ public class Time extends Value {
     }
 
     public Value mul(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Value div(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Value pow(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean eq(Value other) {
@@ -136,8 +152,8 @@ public class Time extends Value {
             this.minutes = new Integer(date[1]);
         else
             try {
-                throw new InvalidObjectException("Incorrect time.");
-            } catch (InvalidObjectException e) {
+                throw new IncorrectDataException("Incorrect time.");
+            } catch (IncorrectDataException e) {
                 e.printStackTrace();
                 return null;
             }
@@ -145,8 +161,8 @@ public class Time extends Value {
             this.seconds = new Integer(date[2]);
         else
             try {
-                throw new InvalidObjectException("Incorrect time.");
-            } catch (InvalidObjectException e) {
+                throw new IncorrectDataException("Incorrect time.");
+            } catch (IncorrectDataException e) {
                 e.printStackTrace();
                 return null;
             }

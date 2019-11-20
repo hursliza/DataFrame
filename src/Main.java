@@ -1,4 +1,8 @@
 import DataFrame.*;
+import javafx.application.Application;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.*;
 import value.*;
 
 import java.io.*;
@@ -8,7 +12,7 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) throws IOException {
 /*
         String[] columnName = new String[]{"group", "name", "language", "mark"};
@@ -121,10 +125,11 @@ public class Main {
         denseDF.printDataFrame();
         */
 
+        /*
         String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\groupby\\groupby.csv");
         DataFrame DFFromFile = new DataFrame(path, new String[]{"String", "Date", "double", "double"});
         DFFromFile.groupby("id").std().printDataFrame();
-
+        */
 
         /*
         String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\sparse.csv");
@@ -218,5 +223,15 @@ public class Main {
         System.out.println(a.lte(c));
 }
  */
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        FileChooser choose = new FileChooser();
+        choose.setTitle("Choose the file: ");
+        File file = choose.showOpenDialog(stage);
+        DataFrame DFFromFile = new DataFrame(file);
+        DFFromFile.groupby("id").max().printDataFrame();
     }
 }

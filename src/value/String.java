@@ -1,5 +1,7 @@
 package value;
 
+import Exceptions.InvalidOperationException;
+
 import java.util.Objects;
 
 public class String extends Value {
@@ -39,15 +41,30 @@ public class String extends Value {
     }
 
     public String mul(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String div(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String pow(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean equals(Object o) {

@@ -1,21 +1,40 @@
 package DataFrame;
 import java.io.*;
 
+import Exceptions.*;
+import javafx.stage.FileChooser;
 import javafx.util.Pair;
 import value.*;
 
 import java.lang.Integer;
 import java.lang.String;
 import java.util.*;
+import javafx.util.*;
 
 
 public class DataFrame{
     public ArrayList<DataFrameColumn> dataFrame = new ArrayList<>();
 
     public DataFrame(String[] names, String[] types) {
-        for (int i = 0; i < names.length; i++){
-            DataFrameColumn newColumn = new DataFrameColumn(names[i], types[i]);
-            dataFrame.add(newColumn);
+        if (names.length != types.length){
+            try {
+                throw new UnequalArraysInConstructorException("Unequal arrays in data frame constructor.");
+            } catch (UnequalArraysInConstructorException e) {
+                e.printStackTrace();
+            }
+        }
+        if (names.length == 0 || types.length == 0){
+            try {
+                throw new EmptyArrayException("Can not create data frame from an empty array.");
+            } catch (EmptyArrayException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            for (int i = 0; i < names.length; i++) {
+                DataFrameColumn newColumn = new DataFrameColumn(names[i], types[i]);
+                dataFrame.add(newColumn);
+            }
         }
     }
 
@@ -40,6 +59,36 @@ public class DataFrame{
             this.data().get(i).fillInColumnValues(columns.get(i));
         }
     }
+
+    public DataFrame(File file) throws FileNotFoundException {
+        Scanner fileScanner = new Scanner(file);
+        ArrayList<String[]> data = new ArrayList<>();
+
+        while (fileScanner.hasNextLine()) {
+            String strLine = fileScanner.nextLine();
+            String[] row = strLine.split(",");
+            data.add(row);
+        }
+        String[] names = data.get(0);
+        ArrayList<ArrayList<Value>> columns = new ArrayList<>();
+        for (int i = 0; i < names.length; i++){
+            DataFrameColumn newColumn = new DataFrameColumn(names[i], "Value");
+            dataFrame.add(newColumn);
+        }
+        data.remove(0);
+        for (int j = 0; j < data.get(0).length; j++){
+            columns.add(new ArrayList<>());
+        }
+        for (int i = 0; i < data.size(); i++){
+            for (int j = 0; j < data.get(0).length; j++){
+                columns.get(j).add(i, Value.build(data.get(i)[j]));
+            }
+        }
+        for (int i = 0; i < columns.size(); i++){
+            this.data().get(i).fillInColumnValues(columns.get(i));
+        }
+    }
+
 
     public DataFrame(){
         dataFrame = new ArrayList<>();
@@ -132,7 +181,6 @@ public class DataFrame{
     static ArrayList<String[]> getData(String path) throws IOException {
         FileInputStream fstream = new FileInputStream(path);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-
         String strLine;
 
         ArrayList<String[]> lines= new ArrayList<>();
@@ -183,30 +231,6 @@ public class DataFrame{
         grouped.dfList = L;
         return grouped;
     }
-
-/*
-    private ArrayList<Value> removeDuplicates(ArrayList<Value> list)
-    {
-        ArrayList<Value> newArray = new ArrayList<>();
-        for (Value element : list) {
-            if (!newArray.isEmpty()) {
-                int ent = 0;
-                for (int i = 0; i < newArray.size(); i++) {
-                    if (element.equals(newArray.get(i))) {
-                        ent += 1;
-                        break;
-                    }
-                }
-                if (ent == 0)
-                    newArray.add(element);
-            }
-            else
-                newArray.add(element);
-        }
-        return newArray;
-    }
-
- */
 
     private List<Integer> indexOfAll(Value obj, List<Value> list) {
         List<Integer> indexList = new ArrayList<>();

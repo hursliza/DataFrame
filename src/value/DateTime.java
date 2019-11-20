@@ -1,5 +1,7 @@
 package value;
 
+import Exceptions.InvalidOperationException;
+
 import java.util.Objects;
 
 public class DateTime extends Value {
@@ -52,15 +54,30 @@ public class DateTime extends Value {
     }
 
     public Value mul(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Value div(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Value pow(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean eq(Value other) {

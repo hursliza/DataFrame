@@ -64,11 +64,7 @@ public class DataFrameColumn{
     }
 
     Value getValue(int i){
-        if (i < data.size()){
-            return data.get(i);
-        }
-        else
-            return null;
+        return data.get(i);
     }
 
     public void printColumn(){

@@ -1,5 +1,7 @@
 package value;
 
+import Exceptions.*;
+
 import java.io.InvalidObjectException;
 import java.util.Objects;
 
@@ -60,15 +62,30 @@ public class Date extends Value {
     }
 
     public Value mul(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Value div(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Value pow(Value other) {
-        return null;
+        try {
+            throw new InvalidOperationException("Invalid operation.");
+        } catch (InvalidOperationException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public boolean eq(Value other) {
@@ -138,30 +155,25 @@ public class Date extends Value {
             }
         }
         this.year = new Integer(date[0]);
-        this.month = new Integer(date[1]);
-        this.day = new Integer(date[2]);
-/*
-        this.year = new Integer(date[0]);
         if ((java.lang.Integer.parseInt(date[1]) < 13) && (java.lang.Integer.parseInt(date[1]) > 0))
             this.month = new Integer(date[1]);
         else
             try {
-                throw new InvalidObjectException("Incorrect date.");
-            } catch (InvalidObjectException e) {
+                throw new IncorrectDataException("Incorrect date.");
+            } catch (IncorrectDataException e) {
                 e.printStackTrace();
                 return null;
             }
-        if ((java.lang.Integer.parseInt(date[2]) < 31) && (java.lang.Integer.parseInt(date[2]) > 0))
+        if ((java.lang.Integer.parseInt(date[2]) < 32) && (java.lang.Integer.parseInt(date[2]) > 0))
             this.day = new Integer(date[2]);
         else
             try {
-                throw new InvalidObjectException("Incorrect date.");
-            } catch (InvalidObjectException e) {
+                throw new IncorrectDataException("Incorrect date.");
+            } catch (IncorrectDataException e) {
                 e.printStackTrace();
                 return null;
             }
 
- */
         return  this;
     }
 
