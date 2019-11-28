@@ -1,6 +1,8 @@
 package DataFrame;
 
 import value.*;
+
+import java.lang.Float;
 import java.lang.String;
 import java.util.Objects;
 
@@ -10,6 +12,11 @@ class COOValue extends Value{
 
     public String toString() {
         return ("|\t(" + this.key + ", " + this.value + ")\t|");
+    }
+
+    @Override
+    public Float toNumber() {
+        return null;
     }
 
     public boolean eq(Value other) {

@@ -242,6 +242,13 @@ public class DataFrame{
         return indexList;
     }
 
+    public ArrayList<String> colNames(){
+        ArrayList<String> names = new ArrayList<>();
+        for (DataFrameColumn dfc : this.dataFrame){
+            names.add(dfc.columnName());
+        }
+        return names;
+    }
 
 }
 

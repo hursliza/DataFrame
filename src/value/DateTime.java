@@ -13,6 +13,11 @@ public class DateTime extends Value {
                 + time.hours.toString() + ':' + time.minutes.toString() + ':' + time.seconds.toString());
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return (date.toNumber()*24+time.toNumber());
+    }
+
     public DateTime add(Value other) {
         if (other instanceof DateTime){
             DateTime newInstance = new DateTime();

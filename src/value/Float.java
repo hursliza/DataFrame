@@ -17,6 +17,11 @@ public class Float extends Value {
         return java.lang.String.valueOf(myValue);
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return myValue;
+    }
+
     public Float add(Value other) {
         Float newInstance = new Float();
         if (other instanceof Float){

@@ -14,6 +14,11 @@ public class Date extends Value {
         return (year.toString() + '-' + month.toString() + '-' + day.toString());
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return (year.toNumber()*365+month.toNumber()*30+day.toNumber());
+    }
+
     public Date(java.lang.String s){    this.create(s); }
     Date(){
         this.year = new Integer("0");

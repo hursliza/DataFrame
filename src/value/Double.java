@@ -17,6 +17,11 @@ public class Double extends Value{
         return java.lang.String.valueOf(myValue);
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return (float) myValue;
+    }
+
     public Double add(Value other) {
         Double newInstance = new Double();
         if (other instanceof Double){

@@ -21,6 +21,11 @@ public class Integer extends Value{
         return java.lang.String.valueOf(this.returnValue().myValue);
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return java.lang.Float.valueOf(myValue);
+    }
+
     public Integer add(Value other) {
         Integer newInstance = new Integer();
         if (other instanceof Integer){

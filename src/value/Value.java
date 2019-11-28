@@ -2,6 +2,7 @@ package value;
 
 public abstract class Value implements Cloneable{
     public abstract java.lang.String toString();
+    public abstract java.lang.Float toNumber();
     public abstract Value add(Value other);
     public abstract Value sub(Value other);
     public abstract Value mul(Value other);

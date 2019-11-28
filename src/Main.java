@@ -1,18 +1,23 @@
 import DataFrame.*;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.*;
 import value.*;
 
 import java.io.*;
-import java.lang.Double;
-import java.lang.Integer;
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
 
-public class Main extends Application {
+public class Main {
     public static void main(String[] args) throws IOException {
 /*
         String[] columnName = new String[]{"group", "name", "language", "mark"};
@@ -125,11 +130,11 @@ public class Main extends Application {
         denseDF.printDataFrame();
         */
 
-        /*
-        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\groupby\\groupby.csv");
+
+        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\groupby\\groubymulti.csv");
         DataFrame DFFromFile = new DataFrame(path, new String[]{"String", "Date", "double", "double"});
-        DFFromFile.groupby("id").std().printDataFrame();
-        */
+        DFFromFile.groupby("id").max().printDataFrame();
+
 
         /*
         String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\sparse.csv");
@@ -223,15 +228,86 @@ public class Main extends Application {
         System.out.println(a.lte(c));
 }
  */
+
+/*
         launch(args);
+
+ */
     }
 
-    @Override
+
     public void start(Stage stage) throws Exception {
         FileChooser choose = new FileChooser();
         choose.setTitle("Choose the file: ");
         File file = choose.showOpenDialog(stage);
         DataFrame DFFromFile = new DataFrame(file);
-        DFFromFile.groupby("id").max().printDataFrame();
+        DataFrame gdf = DFFromFile.groupby("id").max();
+        chooseData(stage, gdf);
+    }
+
+
+    public static void drawPlot(Stage stage, ArrayList<Value> x, ArrayList<Value> y){
+        stage.setTitle("Chart");
+        final NumberAxis xAxis = new NumberAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("x");
+        xAxis.setAutoRanging(true);
+        yAxis.setLabel("y");
+        yAxis.setAutoRanging(true);
+
+        final ScatterChart<Number,Number> scatterChart =
+                new ScatterChart<>(xAxis,yAxis);
+
+        XYChart.Series series = new XYChart.Series();
+        java.lang.Float minX=x.get(0).toNumber(), minY=y.get(0).toNumber();
+        for(int i=0; i < x.size(); i++){
+            series.getData().add(new XYChart.Data(x.get(i).toNumber(), y.get(i).toNumber()));
+            if (x.get(i).toNumber()<minX) minX=x.get(i).toNumber();
+            if (y.get(i).toNumber()<minY) minY=y.get(i).toNumber();
+        }
+
+        xAxis.setLowerBound((double)minX);
+        yAxis.setLowerBound((double)minY);
+
+        Scene scene  = new Scene(scatterChart,800,600);
+        scatterChart.getData().add(series);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void chooseData(Stage stage, DataFrame DF){
+        final Label notification = new Label ();
+        ComboBox comboBoxX = new ComboBox();
+        comboBoxX.setPromptText("Choose X:");
+        ComboBox comboBoxY = new ComboBox();
+        comboBoxY.setPromptText("Choose Y:");
+
+        Button submit = new Button("Draw Chart");
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                if (comboBoxX.getValue() != null &&
+                        !comboBoxX.getValue().toString().isEmpty() && comboBoxY.getValue() != null &&
+                        !comboBoxY.getValue().toString().isEmpty()){
+                        drawPlot(stage, DF.get(comboBoxX.getValue().toString()).data, DF.get(comboBoxY.getValue().toString()).data);
+                }
+                else {
+                    notification.setText("Data not chosen!");
+                }
+            }
+        });
+
+        comboBoxX.getItems().addAll(DF.colNames());
+        comboBoxY.getItems().addAll(DF.colNames());
+
+
+        GridPane grid = new GridPane();
+        grid.add(comboBoxX, 0, 0);
+        grid.add(comboBoxY, 0, 1);
+        grid.add(submit, 0, 2);
+
+        Scene scene = new Scene(grid, 200, 120);
+        stage.setScene(scene);
+        stage.show();
+
     }
 }

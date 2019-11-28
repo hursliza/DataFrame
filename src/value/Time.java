@@ -13,6 +13,11 @@ public class Time extends Value {
         return (hours.toString() + ':' + minutes.toString() + ':' + seconds.toString());
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return (hours.toNumber()*3600+minutes.toNumber()*60+seconds.toNumber());
+    }
+
     public Time(java.lang.String s){    this.create(s); }
     Time(){
         this.hours = new Integer("0");

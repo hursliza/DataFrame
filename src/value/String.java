@@ -19,6 +19,11 @@ public class String extends Value {
         return myValue;
     }
 
+    @Override
+    public java.lang.Float toNumber() {
+        return null;
+    }
+
     public String add(Value other) {
         if (other instanceof String){
             return new String(this.myValue + other.toString());
