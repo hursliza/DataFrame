@@ -130,10 +130,10 @@ public class Main {
         denseDF.printDataFrame();
         */
 
-
-        String path = new String("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\files\\groupby\\groubymulti.csv");
-        DataFrame DFFromFile = new DataFrame(path, new String[]{"String", "Date", "double", "double"});
-        DFFromFile.groupby("id").max().printDataFrame();
+        DataFrameDB DFDB = new DataFrameDB();
+        DFDB.csvLoad("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\db\\groupby.csv", "groupby");
+        DataFrame DFFromFile = DFDB.groupBy("id");
+        DFFromFile.printDataFrame();
 
 
         /*
