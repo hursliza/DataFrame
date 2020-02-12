@@ -18,7 +18,7 @@ public class DataFrameDB extends DataFrame {
     }
 
     public DataFrame groupBy(String colname) {
-        String sql = "SELECT id, min(date), min(total), min(val) FROM groupby GROUP BY id";
+        String sql = "SELECT id, max(date), max(total), max(val) FROM groupby GROUP BY id";
         DataFrame result = new DataFrame(new String[]{"id", "date", "total", "val"}, new String[]{"String", "Date", "double", "double"});
 
         try (Connection conn = connect();

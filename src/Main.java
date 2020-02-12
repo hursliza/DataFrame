@@ -130,10 +130,20 @@ public class Main {
         denseDF.printDataFrame();
         */
 
-        DataFrameDB DFDB = new DataFrameDB();
-        DFDB.csvLoad("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\db\\groupby.csv", "groupby");
-        DataFrame DFFromFile = DFDB.groupBy("id");
-        DFFromFile.printDataFrame();
+        DataFrame DF = new DataFrame(new File("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\db\\groupby.csv"));
+        //DFDB.csvLoad("D:\\studia\\R2\\PrO\\Labs1\\data_frame\\db\\groupby.csv", "groupby");
+        groupedDF DFGroups = DF.groupby("id");
+        DataFrame grouped = new DataFrame();
+        ArrayList<Thread> threads = new ArrayList<>();
+        for (DataFrame group : DFGroups.dfList){
+            DFGT dfgt = new DFGT(grouped, group);
+            Thread thread = new Thread(dfgt);
+            threads.add(thread);
+        }
+
+        for (int i=0; i<threads.size(); i++)
+            threads.get(i).start();
+
 
 
         /*
@@ -310,4 +320,5 @@ public class Main {
         stage.show();
 
     }
+
 }
